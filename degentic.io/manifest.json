@@ -1,0 +1,23 @@
+{
+    "name": "fishtank Live Betting",
+    "short_name": "fishtank Bet",
+    "icons": [
+      {
+        "src": "/icons/Logo_192px_Black.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/icons/Logo_512px_Black.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "theme_color": "#BD0706",
+    "background_color": "#080807",
+    "display": "minimal-ui",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/"
+  }
+  

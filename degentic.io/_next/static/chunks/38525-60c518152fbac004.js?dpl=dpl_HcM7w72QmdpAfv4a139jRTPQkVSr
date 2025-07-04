@@ -1,0 +1,1210 @@
+"use strict";
+(self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+    [38525], {
+        15158: (e, t, s) => {
+            s.d(t, {
+                A: () => g
+            });
+            var r = s(95155),
+                n = s(12115),
+                o = s(48173),
+                a = s.n(o),
+                i = s(5565),
+                l = s(25683),
+                d = s(13478),
+                c = s(87729),
+                m = s(40297),
+                u = s(89888),
+                p = s(64106),
+                x = s(78144),
+                h = s(97727),
+                f = s(41112);
+            let b = (0, s(32068).P)({
+                    client: p.S,
+                    chain: x.E,
+                    address: c.TI
+                }),
+                g = () => {
+                    let e = (0, h.L)(),
+                        [t, s] = (0, n.useState)(null),
+                        [o, p] = n.useState([]),
+                        {
+                            data: x
+                        } = (0, f.Q)({
+                            contract: b,
+                            method: "function paginateContestsBetOnByUser(address, uint256, uint256) returns (uint256[])",
+                            params: [(null == e ? void 0 : e.address) || m.Xd, BigInt(0), BigInt(150)],
+                            queryOptions: {
+                                refetchInterval: 3e3,
+                                enabled: !!e
+                            }
+                        }),
+                        {
+                            data: g
+                        } = (0, f.Q)({
+                            contract: b,
+                            method: "function batchGetBetContests(uint256[]) returns ((string, uint256[], string[], uint256, uint256, uint8, address[], uint256, uint256, bool, string[])[])",
+                            params: [x || []],
+                            queryOptions: {
+                                enabled: x && x.length > 0,
+                                refetchInterval: 3e3
+                            }
+                        });
+                    (0, n.useEffect)(() => {
+                        g && x && x.length == g.length && p(g.map((e, t) => ({
+                            id: parseInt(x[t].toString()),
+                            betName: e[0],
+                            optionBetAmounts: e[1].map(e => parseFloat((0, u.J)(e, c.eC))),
+                            optionNames: e[2],
+                            bettingStartTime: parseInt(e[3].toString()),
+                            bettingEndTime: parseInt(e[4].toString()),
+                            winningOption: e[5],
+                            betters: e[6],
+                            refundModeEnabled: e[9],
+                            metadata: e[10]
+                        })).reverse())
+                    }, [g, x]);
+                    let {
+                        data: v,
+                        isLoading: j
+                    } = (0, f.Q)({
+                        contract: b,
+                        method: "function getUserBetsForContest(uint256, address) returns (uint256[])",
+                        params: [BigInt(t || 0), (null == e ? void 0 : e.address) || m.Xd],
+                        queryOptions: {
+                            enabled: !!e && null !== t,
+                            refetchInterval: 3e3
+                        }
+                    }), N = e => j || !v ? [] : e.optionNames.map((e, t) => ({
+                        optionName: e,
+                        amount: parseFloat((0, u.J)(v[t], c.eC))
+                    })).filter(e => e.amount > 0), w = e => {
+                        t === e ? s(null) : s(e)
+                    }, E = e => {
+                        if (e.winningOption >= e.optionNames.length) return e.refundModeEnabled ? {
+                            pnl: "Refund Issued",
+                            showRed: !0
+                        } : {
+                            pnl: "Results Pending",
+                            showRed: !1
+                        };
+                        let t = N(e),
+                            s = t.reduce((e, t) => e + t.amount, 0),
+                            r = t.find(t => t.optionName === e.optionNames[e.winningOption]);
+                        if (!r) return {
+                            pnl: "".concat(-1 * s),
+                            showRed: !0
+                        };
+                        let n = (e.optionBetAmounts.reduce((e, t) => e + t, 0) - e.optionBetAmounts[e.winningOption]) * .7,
+                            o = e.optionBetAmounts[e.winningOption],
+                            a = r.amount * (n / o + 1) - s;
+                        return {
+                            pnl: "".concat(a > 0 ? "+$" : "-$").concat(Math.abs(a).toFixed(3)),
+                            showRed: a < 0
+                        }
+                    }, y = e => e.refundModeEnabled ? "Refund Issued" : e.winningOption >= e.optionNames.length ? "Results Pending" : e.optionNames[e.winningOption];
+                    return (0, r.jsx)(r.Fragment, {
+                        children: o ? (0, r.jsx)("div", {
+                            className: "w-full flex flex-col gap-8",
+                            children: o.map((e, s) => (0, r.jsxs)("div", {
+                                className: "bg-[#131619] border border-[#4E4E4E] rounded-[2px] p-4 sm:p-6",
+                                children: [(0, r.jsxs)("div", {
+                                    children: [(0, r.jsx)("p", {
+                                        className: "text-xs text-[#A9A9A9] font-medium",
+                                        children: "Bet"
+                                    }), (0, r.jsxs)("button", {
+                                        onClick: () => w(e.id),
+                                        className: "mt-1 text-left cursor-pointer w-full flex justify-between gap-2 items-center bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] text-white font-medium",
+                                        children: [(0, r.jsx)("p", {
+                                            children: e.betName
+                                        }), (0, r.jsx)(i.default, {
+                                            src: "/icons/chevron.svg",
+                                            alt: "chevron",
+                                            width: 16,
+                                            height: 16
+                                        })]
+                                    })]
+                                }), (0, r.jsx)(l.N, {
+                                    children: t === e.id && (0, r.jsx)(d.P.div, {
+                                        initial: {
+                                            height: 0
+                                        },
+                                        animate: {
+                                            height: "auto"
+                                        },
+                                        exit: {
+                                            height: 0
+                                        },
+                                        transition: {
+                                            duration: .2
+                                        },
+                                        className: "overflow-hidden",
+                                        children: (0, r.jsxs)("div", {
+                                            className: "mt-2 flex flex-col gap-2",
+                                            children: [(0, r.jsxs)("div", {
+                                                children: [(0, r.jsx)("p", {
+                                                    className: "text-xs text-[#A9A9A9] font-medium",
+                                                    children: "Your Bet"
+                                                }), N(e).map((e, t) => (0, r.jsxs)("div", {
+                                                    className: "mt-1 w-full flex flex-col sm:flex-row gap-2",
+                                                    children: [(0, r.jsx)("div", {
+                                                        className: "w-full sm:w-1/2 bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] text-white font-medium",
+                                                        children: e.optionName
+                                                    }), (0, r.jsxs)("div", {
+                                                        className: "w-full sm:w-1/2 bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] text-white font-medium",
+                                                        children: ["$", e.amount]
+                                                    })]
+                                                }, t))]
+                                            }), (0, r.jsxs)("div", {
+                                                children: [(0, r.jsx)("p", {
+                                                    className: "text-xs text-[#A9A9A9] font-medium",
+                                                    children: "Result"
+                                                }), (0, r.jsx)("div", {
+                                                    className: "mt-1 w-full bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] text-white font-medium",
+                                                    children: y(e)
+                                                })]
+                                            }), (0, r.jsxs)("div", {
+                                                children: [(0, r.jsx)("p", {
+                                                    className: "text-xs text-[#A9A9A9] font-medium",
+                                                    children: "PNL"
+                                                }), (0, r.jsx)("div", {
+                                                    className: "mt-1 w-full bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] font-medium ".concat(E(e).showRed ? "text-[#E80D00]" : "text-[#53D0B0]"),
+                                                    children: E(e).pnl
+                                                })]
+                                            })]
+                                        })
+                                    })
+                                })]
+                            }, s))
+                        }) : (0, r.jsx)("div", {
+                            className: "bg-[#131619] border border-[#4E4E4E] rounded-[2px] p-4 sm:p-6",
+                            children: (0, r.jsxs)("p", {
+                                className: "text-[#A9A9A9] text-sm sm:text-base",
+                                children: ["You haven't placed a bet yet.", " ", (0, r.jsx)(a(), {
+                                    href: "/",
+                                    className: "text-[#53D0B0] underline hover:text-[#51b79d]",
+                                    children: "Bet Now"
+                                })]
+                            })
+                        })
+                    })
+                }
+        },
+        18676: (e, t, s) => {
+            s.d(t, {
+                z: () => l
+            });
+            var r = s(95155),
+                n = s(12115),
+                o = s(47650),
+                a = s(5565),
+                i = s(13478);
+            let l = e => {
+                let {
+                    children: t,
+                    wider: s,
+                    onClose: l
+                } = e, [d, c] = (0, n.useState)(!1);
+                return ((0, n.useEffect)(() => {
+                    c(!0), document.body.style.overflow = "hidden";
+                    let e = e => {
+                        let t = document.querySelector(".modal-container");
+                        t && !t.contains(e.target) && e.preventDefault()
+                    };
+                    return document.addEventListener("touchmove", e, {
+                        passive: !1
+                    }), () => {
+                        document.body.style.overflow = "", document.removeEventListener("touchmove", e)
+                    }
+                }, []), d) ? (0, o.createPortal)((0, r.jsx)(i.P.div, {
+                    variants: {
+                        initial: {
+                            opacity: 0
+                        },
+                        animate: {
+                            opacity: 1,
+                            transition: {
+                                duration: .5
+                            }
+                        }
+                    },
+                    initial: "initial",
+                    animate: "animate",
+                    exit: "initial",
+                    transition: {
+                        delay: .1,
+                        duration: .5
+                    },
+                    className: "fixed z-50 inset-0 flex items-center justify-center bg-[#080807D9] bg-opacity-85",
+                    onClick: l,
+                    children: (0, r.jsx)("div", {
+                        id: "modal-container",
+                        className: "modal-container relative bg-[#191D21] border border-[#4E4E4E] rounded-[2px] overflow-hidden transform transition-all w-[95%] sm:w-full max-h-[80vh] shadow-lg ".concat(s ? "max-w-[640px]" : "max-w-[512px]"),
+                        role: "dialog",
+                        "aria-modal": "true",
+                        "aria-labelledby": "modal-headline",
+                        onClick: e => e.stopPropagation(),
+                        children: (0, r.jsxs)("div", {
+                            className: "py-4 pl-4 sm:py-6 sm:pl-6 pr-2 relative flex flex-col max-h-[80vh]",
+                            children: [(0, r.jsx)("button", {
+                                onClick: l,
+                                className: "absolute top-4 sm:top-6 right-4 sm:right-6 cursor-pointer",
+                                children: (0, r.jsx)(a.default, {
+                                    src: "/icons/close.svg",
+                                    alt: "Close",
+                                    width: 18,
+                                    height: 18
+                                })
+                            }), (0, r.jsx)("div", {
+                                className: "flex-1 overflow-auto scrollable-content pr-4",
+                                children: t
+                            })]
+                        })
+                    })
+                }), document.body) : null
+            }
+        },
+        24786: (e, t, s) => {
+            s.d(t, {
+                A: () => b
+            });
+            var r = s(95155),
+                n = s(12115),
+                o = s(87729),
+                a = s(20241),
+                i = s(40297),
+                l = s(89888),
+                d = s(64106),
+                c = s(78144),
+                m = s(97727),
+                u = s(41112),
+                p = s(57857),
+                x = s(32068),
+                h = s(62685);
+            let f = (0, x.P)({
+                    client: d.S,
+                    chain: c.E,
+                    address: o.TI
+                }),
+                b = () => {
+                    let e = (0, m.L)(),
+                        [t, s] = n.useState([]),
+                        {
+                            data: d,
+                            refetch: c
+                        } = (0, u.Q)({
+                            contract: f,
+                            method: "function paginateContestsBetOnByUserAndPendingClaim(address, uint256, uint256) returns (uint256[], uint256[])",
+                            params: [(null == e ? void 0 : e.address) || i.Xd, BigInt(0), BigInt(150)],
+                            queryOptions: {
+                                refetchInterval: 3e3,
+                                enabled: !!e
+                            }
+                        }),
+                        x = () => {
+                            if (!d) return [];
+                            let e = [];
+                            for (let t = 0; t < d[0].length; t++) d[1][t] > BigInt(0) && e.push({
+                                id: d[0][t],
+                                amount: d[1][t]
+                            });
+                            return e
+                        },
+                        {
+                            data: b
+                        } = (0, u.Q)({
+                            contract: f,
+                            method: "function batchGetBetContests(uint256[]) returns ((string, uint256[], string[], uint256, uint256, uint8, address[], uint256, uint256, bool, string[])[])",
+                            params: [(() => {
+                                if (!d) return [];
+                                let e = [];
+                                for (let t = 0; t < d[0].length; t++) d[1][t] > BigInt(0) && e.push(d[0][t]);
+                                return e
+                            })()],
+                            queryOptions: {
+                                enabled: d && d.length > 0 && !!e && !!(null == e ? void 0 : e.address),
+                                refetchInterval: 3e3
+                            }
+                        });
+                    (0, n.useEffect)(() => {
+                        let e = x();
+                        if (b && e.length == b.length) {
+                            let t = b.map((t, s) => ({
+                                    id: parseInt(e[s].id.toString()),
+                                    betName: t[0],
+                                    optionBetAmounts: t[1].map(e => parseFloat((0, l.J)(e, o.eC))),
+                                    optionNames: t[2],
+                                    bettingStartTime: parseInt(t[3].toString()),
+                                    bettingEndTime: parseInt(t[4].toString()),
+                                    winningOption: t[5],
+                                    betters: t[6],
+                                    refundModeEnabled: t[9],
+                                    metadata: t[10],
+                                    claimableAmount: parseFloat((0, l.J)(e[s].amount, o.eC))
+                                })),
+                                r = [];
+                            for (let e = 0; e < t.length; e++) t[e].winningOption < t[e].optionNames.length ? r.push(t[e]) : t[e].refundModeEnabled && r.push(t[e]);
+                            s(r.reverse())
+                        }
+                    }, [b, d]);
+                    let [g, v] = n.useState([!1, 0, 0]), [j, N] = n.useState(void 0), w = () => !!t && 0 != t.length, E = () => w() && t ? t.filter(e => !1 == e.refundModeEnabled) : [], y = () => w() && t ? t.filter(e => !0 == e.refundModeEnabled) : [];
+                    (0, n.useEffect)(() => {
+                        void 0 !== j && ("success" === j && ((0, a.oR)({
+                            title: "Claim successful.",
+                            description: "Your bet has been claimed successfully."
+                        }), setTimeout(() => {
+                            N(void 0)
+                        }, 2e3)), "failed" === j && ((0, a.oR)({
+                            title: "Something went wrong.",
+                            description: "Your claim failed. Please try again.",
+                            variant: "destructive"
+                        }), setTimeout(() => {
+                            N(void 0)
+                        }, 2e3)))
+                    }, [j]);
+                    let A = e => (0, h.m)({
+                        contract: f,
+                        method: "function claim(uint256)",
+                        params: [e]
+                    });
+                    return (0, r.jsx)(r.Fragment, {
+                        children: w() ? (0, r.jsxs)(r.Fragment, {
+                            children: [E().length > 0 && (0, r.jsx)("div", {
+                                className: "flex flex-col gap-2",
+                                children: E().map((e, t) => (0, r.jsxs)("div", {
+                                    className: "bg-[#131619] border border-[#4E4E4E] rounded-[2px] p-4 sm:p-6",
+                                    children: [(0, r.jsxs)("div", {
+                                        className: "flex flex-col gap-2",
+                                        children: [(0, r.jsxs)("div", {
+                                            children: [(0, r.jsx)("p", {
+                                                className: "text-xs text-[#A9A9A9] font-medium",
+                                                children: "Bet"
+                                            }), (0, r.jsx)("div", {
+                                                className: "mt-1 text-left cursor-pointer w-full flex justify-between gap-2 items-center bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] text-white font-medium",
+                                                children: (0, r.jsx)("p", {
+                                                    children: e.betName
+                                                })
+                                            })]
+                                        }), (0, r.jsxs)("div", {
+                                            children: [(0, r.jsx)("p", {
+                                                className: "text-xs text-[#A9A9A9] font-medium",
+                                                children: "PNL"
+                                            }), (0, r.jsxs)("div", {
+                                                className: "mt-1 w-full bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] font-medium text-[#53D0B0]",
+                                                children: ["$", e.claimableAmount]
+                                            })]
+                                        })]
+                                    }), (0, r.jsx)(p.v, {
+                                        transaction: () => A(BigInt(e.id.toString())),
+                                        unstyled: !0,
+                                        className: "mt-8 w-full cursor-pointer bg-[#2F322D] hover:bg-stone-900 border border-[#4E4E4E] rounded-[2px] py-1 sm:py-2 px-6 font-medium text-base uppercase text-[#F2E691]",
+                                        onTransactionConfirmed: e => {
+                                            console.log("Transaction complete!", e), v([!1, 0, 0]), N("success"), c()
+                                        },
+                                        onTransactionSent: () => {
+                                            v([!0, t, 1])
+                                        },
+                                        onError: e => {
+                                            console.error("Transaction failed!", e), v([!1, 0, 0]), N("failed"), c()
+                                        },
+                                        children: g[0] && g[1] == t && 1 == g[2] ? (0, r.jsx)("div", {
+                                            className: "flex flex-col items-center",
+                                            children: (0, r.jsx)("div", {
+                                                className: "w-6 h-6 border-2 border-t-transparent border-white rounded-full animate-spin"
+                                            })
+                                        }) : "Claim"
+                                    })]
+                                }, t))
+                            }), y().length > 0 && (0, r.jsx)("div", {
+                                className: "flex flex-col gap-2",
+                                children: y().map((e, t) => (0, r.jsxs)("div", {
+                                    className: "bg-[#131619] border border-[#4E4E4E] rounded-[2px] p-4 sm:p-6",
+                                    children: [(0, r.jsxs)("div", {
+                                        className: "flex flex-col gap-2",
+                                        children: [(0, r.jsxs)("div", {
+                                            children: [(0, r.jsx)("p", {
+                                                className: "text-xs text-[#A9A9A9] font-medium",
+                                                children: "Bet"
+                                            }), (0, r.jsx)("div", {
+                                                className: "mt-1 text-left cursor-pointer w-full flex justify-between gap-2 items-center bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] text-white font-medium",
+                                                children: (0, r.jsx)("p", {
+                                                    children: e.betName
+                                                })
+                                            })]
+                                        }), (0, r.jsxs)("div", {
+                                            children: [(0, r.jsx)("p", {
+                                                className: "text-xs text-[#A9A9A9] font-medium",
+                                                children: "This bet was deemed unfair, and all funds have been returned."
+                                            }), (0, r.jsxs)("div", {
+                                                className: "mt-1 w-full bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] font-medium text-[#F97971]",
+                                                children: ["$", e.claimableAmount]
+                                            })]
+                                        })]
+                                    }), (0, r.jsx)(p.v, {
+                                        transaction: () => A(BigInt(e.id.toString())),
+                                        unstyled: !0,
+                                        className: "mt-8 w-full cursor-pointer bg-[#2F322D] hover:bg-stone-900 border border-[#4E4E4E] rounded-[2px] py-1 sm:py-2 px-6 font-medium text-base uppercase text-[#F2E691]",
+                                        onTransactionConfirmed: e => {
+                                            console.log("Transaction complete!", e), v([!1, 0, 0]), N("success"), c()
+                                        },
+                                        onTransactionSent: () => {
+                                            v([!0, t, 2])
+                                        },
+                                        onError: e => {
+                                            console.error("Transaction failed!", e), v([!1, 0, 0]), N("failed"), c()
+                                        },
+                                        children: g[0] && g[1] == t && 2 == g[2] ? (0, r.jsx)("div", {
+                                            className: "flex flex-col items-center",
+                                            children: (0, r.jsx)("div", {
+                                                className: "w-6 h-6 border-2 border-t-transparent border-white rounded-full animate-spin"
+                                            })
+                                        }) : "Claim Refund"
+                                    })]
+                                }, t))
+                            })]
+                        }) : (0, r.jsx)("div", {
+                            className: "bg-[#131619] border border-[#4E4E4E] rounded-[2px] p-4 sm:p-6",
+                            children: (0, r.jsx)("p", {
+                                className: "text-[#A9A9A9] text-sm sm:text-base",
+                                children: "Nothing to claim currently! Good luck!"
+                            })
+                        })
+                    })
+                }
+        },
+        38525: (e, t, s) => {
+            s.d(t, {
+                A: () => U
+            });
+            var r = s(95155),
+                n = s(12115),
+                o = s(5565),
+                a = s(20241),
+                i = s(87729),
+                l = s(69596),
+                d = s(48948),
+                c = s(69729),
+                m = s(55571);
+            let u = e => {
+                let {
+                    setShowUserModal: t,
+                    setShowPfpView: s
+                } = e, {
+                    disconnect: u
+                } = (0, d.u)(), p = (0, c.z)(), {
+                    displayName: x,
+                    pfpString: h,
+                    setDisplayName: f
+                } = (0, m.R)(), [b, g] = (0, n.useState)(x || ""), [v, j] = (0, n.useState)(!1);
+                return (0, r.jsxs)("div", {
+                    className: "bg-[#131619] border border-[#4E4E4E] rounded-[2px] p-4 sm:p-6",
+                    children: [(0, r.jsxs)("div", {
+                        className: "flex flex-col sm:flex-row gap-4",
+                        children: [(0, r.jsxs)("div", {
+                            className: "w-[140px] mx-auto sm:mx-0",
+                            children: [(0, r.jsx)("div", {
+                                className: "w-[140px] h-[140px] flex justify-center items-center bg-[#090B0C] border border-[#4E4E4E]",
+                                children: (0, r.jsx)(o.default, {
+                                    src: h && (0, l.rP)(h) ? h : i.MP[0],
+                                    alt: "User icon",
+                                    width: 100,
+                                    height: 100,
+                                    className: "rounded-full"
+                                })
+                            }), (0, r.jsx)("button", {
+                                onClick: () => s(!0),
+                                className: "w-full cursor-pointer bg-[#1F2223] hover:bg-stone-900 border border-[#4E4E4E] py-[10px] px-2 font-medium text-base uppercase",
+                                children: "Change"
+                            })]
+                        }), (0, r.jsxs)("div", {
+                            className: "w-full",
+                            children: [(0, r.jsxs)("div", {
+                                children: [(0, r.jsx)("p", {
+                                    className: "text-[#A9A9A9] text-xs sm:text-sm uppercase font-medium",
+                                    children: "Display Name"
+                                }), (0, r.jsx)("input", {
+                                    className: "w-full mt-[2px] bg-[#1F2223] rounded-[2px] border border-[#4E4E4E] p-[10px] focus:outline-none focus:ring focus:ring-[#F2E691] focus:border-[#F2E691]",
+                                    placeholder: "[name]",
+                                    type: "text",
+                                    name: "name",
+                                    id: "name",
+                                    autoComplete: "off",
+                                    value: b || "",
+                                    onChange: e => g(e.target.value)
+                                })]
+                            }), (0, r.jsxs)("div", {
+                                className: "mt-4 w-full flex gap-2",
+                                children: [(0, r.jsx)("button", {
+                                    onClick: () => {
+                                        if (b === x) {
+                                            (0, a.oR)({
+                                                title: "New display name matches old display name.",
+                                                description: "Please enter a different display name.",
+                                                variant: "destructive"
+                                            });
+                                            return
+                                        }
+                                        j(!0), setTimeout(() => {
+                                            j(!1), f(b), (0, a.oR)({
+                                                title: "Success",
+                                                description: "Display name updated successfully"
+                                            })
+                                        }, 1e3)
+                                    },
+                                    className: "w-1/2 cursor-pointer bg-[#1F2223] hover:bg-stone-900 border border-[#4E4E4E] py-[10px] px-2 font-medium text-base uppercase",
+                                    children: v ? (0, r.jsx)("div", {
+                                        className: "flex flex-col items-center",
+                                        children: (0, r.jsx)("div", {
+                                            className: "w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin"
+                                        })
+                                    }) : "Save"
+                                }), (0, r.jsx)("button", {
+                                    onClick: () => {
+                                        t(!1)
+                                    },
+                                    className: "w-1/2 cursor-pointer bg-[#1F2223] hover:bg-stone-900 border border-[#4E4E4E] py-[10px] px-2 font-medium text-base uppercase",
+                                    children: "Cancel"
+                                })]
+                            })]
+                        })]
+                    }), (0, r.jsx)("button", {
+                        onClick: () => {
+                            p && u(p), t(!1)
+                        },
+                        className: "mt-4 w-full cursor-pointer bg-[#1F2223] hover:bg-stone-900 border border-[#4E4E4E] py-[10px] px-2 font-medium text-base uppercase",
+                        children: "Log Out"
+                    })]
+                })
+            };
+            var p = s(24786),
+                x = s(15158),
+                h = s(18676),
+                f = s(40297),
+                b = s(25848),
+                g = s(25683),
+                v = s(13478),
+                j = s(79995),
+                N = s(19710),
+                w = s(29602);
+
+            function E(e) {
+                let {
+                    delayDuration: t = 0,
+                    ...s
+                } = e;
+                return (0, r.jsx)(N.Kq, {
+                    "data-slot": "tooltip-provider",
+                    delayDuration: t,
+                    ...s
+                })
+            }
+
+            function y(e) {
+                let {
+                    ...t
+                } = e;
+                return (0, r.jsx)(E, {
+                    children: (0, r.jsx)(N.bL, {
+                        "data-slot": "tooltip",
+                        ...t
+                    })
+                })
+            }
+
+            function A(e) {
+                let {
+                    ...t
+                } = e;
+                return (0, r.jsx)(N.l9, {
+                    "data-slot": "tooltip-trigger",
+                    ...t
+                })
+            }
+
+            function C(e) {
+                let {
+                    className: t,
+                    sideOffset: s = 0,
+                    children: n,
+                    ...o
+                } = e;
+                return (0, r.jsx)(N.ZL, {
+                    children: (0, r.jsxs)(N.UC, {
+                        "data-slot": "tooltip-content",
+                        sideOffset: s,
+                        className: (0, w.cn)("bg-primary text-primary-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) rounded-md px-3 py-1.5 text-xs text-balance", t),
+                        ...o,
+                        children: [n, (0, r.jsx)(N.i3, {
+                            className: "bg-primary fill-primary z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]"
+                        })]
+                    })
+                })
+            }
+            var S = s(97727);
+            let k = [{
+                    id: 1,
+                    name: "Bitcoin",
+                    ticker: "btc",
+                    network: "btc",
+                    image: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400"
+                }, {
+                    id: 2,
+                    name: "Ethereum",
+                    ticker: "eth",
+                    network: "eth",
+                    image: "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501400"
+                }, {
+                    id: 3,
+                    name: "Solana",
+                    ticker: "sol",
+                    network: "sol",
+                    image: "https://assets.coingecko.com/coins/images/4128/large/solana.png?1696501400"
+                }, {
+                    id: 4,
+                    name: "Ripple",
+                    ticker: "xrp",
+                    network: "xrp",
+                    image: "https://content-api.changenow.io/uploads/xrp_3b5212fd4a.svg"
+                }, {
+                    id: 5,
+                    name: "Dogecoin",
+                    ticker: "doge",
+                    network: "doge",
+                    image: "https://content-api.changenow.io/uploads/doge_a0321dc732.svg"
+                }, {
+                    id: 6,
+                    name: "Cardano",
+                    ticker: "ada",
+                    network: "ada",
+                    image: "https://content-api.changenow.io/uploads/ada_fb42809541.svg"
+                }, {
+                    id: 7,
+                    name: "BNB",
+                    ticker: "bnb",
+                    network: "bsc",
+                    image: "https://content-api.changenow.io/uploads/bnbbsc_331e969a6b.svg"
+                }, {
+                    id: 8,
+                    name: "Avalanche",
+                    ticker: "avax",
+                    network: "cchain",
+                    image: "https://content-api.changenow.io/uploads/avaxs_4e906c3ad4.svg"
+                }],
+                F = () => {
+                    let e = (0, S.L)(),
+                        [t, s] = (0, n.useState)({
+                            fromAmount: "",
+                            fromNetwork: "btc",
+                            fromCurrency: "btc",
+                            toNetwork: "base",
+                            toCurrency: "usdc",
+                            address: (null == e ? void 0 : e.address) || f.Xd
+                        }),
+                        [i, l] = (0, n.useState)(null),
+                        [d, c] = (0, n.useState)(!0),
+                        [m, u] = (0, n.useState)(!1),
+                        {
+                            mutateAsync: p,
+                            isPending: x,
+                            data: h
+                        } = (0, b.n)({
+                            mutationFn: async e => (await fetch("/api/on-ramp", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(e)
+                            })).json()
+                        }),
+                        N = e => {
+                            s(t => ({
+                                ...t,
+                                fromCurrency: e.ticker,
+                                fromNetwork: e.network
+                            }))
+                        };
+                    (0, n.useEffect)(() => {
+                        if (!e) {
+                            c(!0);
+                            return
+                        }
+                        x ? c(!1) : isNaN(parseFloat(t.fromAmount)) || 0 >= parseFloat(t.fromAmount || "0") ? (l("Enter amount to receive"), c(!0)) : (l(null), c(!1))
+                    }, [e, x, t.fromAmount]);
+                    let w = async s => {
+                        if (s.preventDefault(), !e) {
+                            (0, a.oR)({
+                                title: "Not Connected",
+                                description: "Please connect your wallet to proceed.",
+                                variant: "destructive"
+                            });
+                            return
+                        }
+                        if ("" === t.fromAmount) {
+                            (0, a.oR)({
+                                title: "Invalid Amount",
+                                description: "Please enter a valid amount.",
+                                variant: "destructive"
+                            });
+                            return
+                        }
+                        let r = {
+                            fromAmount: parseFloat(t.fromAmount),
+                            fromNetwork: t.fromNetwork,
+                            fromCurrency: t.fromCurrency,
+                            toNetwork: t.toNetwork,
+                            toCurrency: t.toCurrency,
+                            address: t.address
+                        };
+                        await p(r, {
+                            onSuccess: e => {
+                                e.id ? (0, a.oR)({
+                                    title: "Transaction Initiated",
+                                    description: "Transaction ID: ".concat(e.id, ". Please keep this for your records.")
+                                }) : (console.error("Failed to get transaction id from ChangeNow response", e), (0, a.oR)({
+                                    title: "Transaction Failed",
+                                    description: "An unknown error occurred while processing your request.",
+                                    variant: "destructive"
+                                }))
+                            },
+                            onError: e => {
+                                var t;
+                                console.error(e), (0, a.oR)({
+                                    title: "Transaction Failed",
+                                    description: null !== (t = null == e ? void 0 : e.message) && void 0 !== t ? t : "An unknown error occurred while processing your request.",
+                                    variant: "destructive"
+                                })
+                            }
+                        })
+                    }, [F, B] = (0, n.useState)("");
+                    return (0, n.useEffect)(() => {
+                        if ((null == h ? void 0 : h.payinAddress) && (null == h ? void 0 : h.payoutAddress)) {
+                            let e = h.payinAddress;
+                            j.toDataURL(e, {
+                                width: 128,
+                                margin: 2
+                            }, (e, t) => {
+                                if (e) {
+                                    console.error(e);
+                                    return
+                                }
+                                B(t)
+                            }), u(!0)
+                        }
+                    }, [h]), (0, r.jsx)(g.N, {
+                        mode: "wait",
+                        children: !1 == m ? (0, r.jsx)(v.P.div, {
+                            initial: {
+                                opacity: 0
+                            },
+                            animate: {
+                                opacity: 1
+                            },
+                            exit: {
+                                opacity: 0
+                            },
+                            transition: {
+                                duration: .5
+                            },
+                            className: "mt-6",
+                            children: (0, r.jsxs)("form", {
+                                onSubmit: w,
+                                children: [(0, r.jsx)("div", {
+                                    className: "mb-4 flex flex-row flex-wrap items-center gap-2",
+                                    children: k.map((e, s) => (0, r.jsxs)("button", {
+                                        type: "button",
+                                        className: "flex flex-row items-center gap-2 rounded-[2px] p-1.5 cursor-pointer ".concat(e.ticker === t.fromCurrency && e.network === t.fromNetwork ? "bg-foreground text-background" : "bg-background text-foreground"),
+                                        onClick: () => N(e),
+                                        children: [(0, r.jsx)("div", {
+                                            className: "w-4 h-4",
+                                            children: e.image ? (0, r.jsx)(o.default, {
+                                                src: e.image,
+                                                width: 16,
+                                                height: 16,
+                                                alt: e.name,
+                                                className: "rounded-full"
+                                            }) : (0, r.jsx)("p", {
+                                                className: "text-xs text-center",
+                                                children: e.ticker
+                                            })
+                                        }), (0, r.jsx)("p", {
+                                            className: "text-xs",
+                                            children: e.name
+                                        })]
+                                    }, s))
+                                }), (0, r.jsxs)("div", {
+                                    className: "mb-4",
+                                    children: [(0, r.jsx)("label", {
+                                        className: "font-medium text-xs text-[#A9A9A9]",
+                                        htmlFor: "amount",
+                                        children: "Enter Amount"
+                                    }), (0, r.jsx)("input", {
+                                        type: "text",
+                                        inputMode: "decimal",
+                                        id: "amount",
+                                        name: "amount",
+                                        value: t.fromAmount,
+                                        onChange: e => {
+                                            let t = e.target.value;
+                                            ("" === t || /^\d*\.?\d*$/.test(t)) && (s(e => ({
+                                                ...e,
+                                                fromAmount: t
+                                            })), isNaN(parseFloat(t)) && "" !== t ? l("Invalid amount") : l(null))
+                                        },
+                                        className: "mt-1 w-full text-left bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] text-white font-medium focus:outline-none focus:ring focus:ring-[#F2E691] focus:border-[#F2E691]",
+                                        placeholder: "Enter amount"
+                                    }), i && (0, r.jsx)("p", {
+                                        className: "mt-[6px] text-xs text-red-500",
+                                        children: i
+                                    })]
+                                }), (0, r.jsx)("button", {
+                                    type: "submit",
+                                    className: "w-full bg-[#1F2223] border border-[#4E4E4E] py-[10px] px-2 font-medium text-[#F2E691] text-base uppercase ".concat(d ? "opacity-50" : "cursor-pointer hover:bg-stone-900"),
+                                    disabled: d,
+                                    children: x ? "Generating..." : "Generate Address to Deposit Funds"
+                                })]
+                            })
+                        }, "form") : (0, r.jsx)(v.P.div, {
+                            initial: {
+                                opacity: 0
+                            },
+                            animate: {
+                                opacity: 1
+                            },
+                            exit: {
+                                opacity: 0
+                            },
+                            transition: {
+                                duration: .5
+                            },
+                            className: "mt-6",
+                            children: h ? (0, r.jsxs)("div", {
+                                className: "flex flex-col space-y-4 text-[#A9A9A9] text-sm sm:text-base",
+                                children: [(null == h ? void 0 : h.fromAmount) && (null == h ? void 0 : h.fromCurrency) && (0, r.jsxs)("p", {
+                                    className: "",
+                                    children: ["Send", " ", (0, r.jsxs)("span", {
+                                        className: "bg-background",
+                                        children: [h.fromAmount, " ", h.fromCurrency.toUpperCase(), " (", h.fromNetwork, ")"]
+                                    }), " ", "to this address to buy USDC:", " ", (0, r.jsx)(E, {
+                                        children: (0, r.jsxs)(y, {
+                                            children: [(0, r.jsx)(A, {
+                                                onClick: () => {
+                                                    (null == h ? void 0 : h.payinAddress) ? (navigator.clipboard.writeText(h.payinAddress), (0, a.oR)({
+                                                        title: "Address Copied",
+                                                        description: "The deposit address has been copied to your clipboard."
+                                                    })) : (0, a.oR)({
+                                                        title: "Copy Failed",
+                                                        description: "No address available to copy.",
+                                                        variant: "destructive"
+                                                    })
+                                                },
+                                                children: (0, r.jsx)("span", {
+                                                    className: "break-all text-left bg-background hover:bg-foreground/20 cursor-pointer",
+                                                    children: (null == h ? void 0 : h.payinAddress) || "Address not available"
+                                                })
+                                            }), (0, r.jsx)(C, {
+                                                children: (0, r.jsx)("p", {
+                                                    children: "Copy Address"
+                                                })
+                                            })]
+                                        })
+                                    })]
+                                }), F && (0, r.jsx)("div", {
+                                    className: "flex justify-center",
+                                    children: (0, r.jsx)(o.default, {
+                                        src: F,
+                                        width: 128,
+                                        height: 128,
+                                        alt: "QR Code"
+                                    })
+                                }), (0, r.jsxs)("p", {
+                                    children: ["You will receive: ", (null == h ? void 0 : h.toAmount) || "N/A", " ", h.toCurrency.toUpperCase() || "N/A"]
+                                }), (0, r.jsxs)("p", {
+                                    className: "-mt-1 italic",
+                                    children: ["Please send ", h.fromAmount, " ", h.fromCurrency.toUpperCase(), " to the above address. You should receive USDC within", " ", "btc" == h.fromNetwork ? "30" : "5", " ", "minutes."]
+                                })]
+                            }) : (0, r.jsx)("p", {
+                                children: "Something went wrong"
+                            })
+                        }, "results")
+                    })
+                };
+            var B = s(60090),
+                P = s(64106),
+                T = s(78144);
+            let D = () => {
+                    let e = (0, S.L)(),
+                        [t, s] = (0, n.useState)(!1),
+                        [o, a] = (0, n.useState)(!1),
+                        [l, d] = (0, n.useState)("");
+                    return (0, n.useEffect)(() => {
+                        e && j.toDataURL(e.address, {
+                            width: 128,
+                            margin: 2
+                        }, (e, t) => {
+                            if (e) {
+                                console.error(e);
+                                return
+                            }
+                            d(t)
+                        })
+                    }, [e]), (0, r.jsxs)("div", {
+                        className: "bg-[#131619] border border-[#4E4E4E] rounded-[2px] px-4 py-6 sm:px-6 sm:py-8",
+                        children: [t && (0, r.jsxs)(h.z, {
+                            onClose: () => s(!1),
+                            children: [(0, r.jsx)("h2", {
+                                className: "text-[#F2E691] text-xl font-bold",
+                                children: "Swap Crypto For USDC"
+                            }), (0, r.jsx)("p", {
+                                className: "mt-3 text-[#A9A9A9] text-sm sm:text-base",
+                                children: "Select the asset and amount you would like to swap into USDC and we will generate a deposit address for you to send it to."
+                            }), (0, r.jsx)(F, {})]
+                        }), o && (0, r.jsx)(h.z, {
+                            onClose: () => a(!1),
+                            children: (0, r.jsx)("div", {
+                                className: "mt-8 flex justify-center items-center",
+                                children: (0, r.jsx)(B.e, {
+                                    client: P.S,
+                                    payOptions: {
+                                        mode: "fund_wallet",
+                                        metadata: {
+                                            name: "Fund Wallet"
+                                        },
+                                        prefillBuy: {
+                                            chain: T.E,
+                                            token: {
+                                                address: i.gB,
+                                                name: "USDC",
+                                                symbol: "USDC",
+                                                icon: "/icons/usdc.svg"
+                                            },
+                                            amount: "100"
+                                        }
+                                    },
+                                    supportedTokens: {
+                                        [T.E.id]: [{
+                                            address: i.gB,
+                                            name: "USDC",
+                                            symbol: "USDC",
+                                            icon: "/icons/usdc.svg"
+                                        }]
+                                    }
+                                })
+                            })
+                        }), (0, r.jsx)("p", {
+                            className: "text-[#A9A9A9] text-sm sm:text-base",
+                            children: "Load funds to participate in predictions on current and future activities on Fishtank."
+                        }), (0, r.jsxs)("div", {
+                            className: "mt-8 w-full flex flex-col gap-4",
+                            children: [(0, r.jsx)("button", {
+                                onClick: () => {
+                                    s(!0)
+                                },
+                                className: "cursor-pointer bg-[#1F2223] hover:bg-stone-900 border border-[#4E4E4E] py-[10px] px-2 font-medium text-[#F2E691] text-base uppercase",
+                                children: "Swap Crypto For USDC"
+                            }), (0, r.jsxs)("div", {
+                                className: "w-full",
+                                children: [(0, r.jsx)("button", {
+                                    onClick: function() {
+                                        a(!0)
+                                    },
+                                    className: "w-full cursor-pointer bg-[#1F2223] hover:bg-stone-900 border border-[#4E4E4E] py-[10px] px-2 font-medium text-[#F2E691] text-base uppercase",
+                                    children: "Buy USDC With Card"
+                                }), (0, r.jsxs)("p", {
+                                    className: "mt-2 text-center text-xs text-[#4E4E4E] max-w-md mx-auto",
+                                    children: ["To buy USDC, click the button, select buy, change the token to USDC, then enter how much you want to buy.", " "]
+                                })]
+                            })]
+                        })]
+                    })
+                },
+                I = e => {
+                    let {
+                        setShowPfpView: t
+                    } = e, {
+                        pfpString: s,
+                        setPfpString: d
+                    } = (0, m.R)(), [c, u] = (0, n.useState)(s || ""), [p, x] = n.useState(!1);
+                    return (0, r.jsxs)("div", {
+                        className: "mt-6",
+                        children: [(0, r.jsxs)("div", {
+                            className: "max-w-[510px]",
+                            children: [(0, r.jsx)("p", {
+                                className: "text-sm uppercase font-medium text-[#F2E691]",
+                                children: "Current"
+                            }), (0, r.jsxs)("div", {
+                                className: "mt-2 flex flex-col sm:flex-row gap-6 sm:items-center",
+                                children: [(0, r.jsx)("div", {
+                                    className: "shrink-0 bg-[#090B0C] border border-[#4E4E4E] w-[200px] h-[200px] flex justify-center items-center p-5",
+                                    children: (0, r.jsx)("div", {
+                                        className: "relative",
+                                        children: (0, r.jsx)(o.default, {
+                                            src: s && (0, l.rP)(s) ? s : i.MP[0],
+                                            alt: "User icon",
+                                            width: 100,
+                                            height: 100,
+                                            objectFit: "cover"
+                                        })
+                                    })
+                                }), (0, r.jsx)("p", {
+                                    className: "text-sm text-[#B1B1B1]",
+                                    children: "Choose your profile photo to rep your favorite fish this season."
+                                })]
+                            })]
+                        }), (0, r.jsx)("div", {
+                            className: "mt-12 grid grid-cols-2 min-[460px]:grid-cols-3 sm:grid-cols-4 gap-4 place-items-center sm:place-content-between",
+                            children: i.MP.map((e, t) => (0, r.jsx)("div", {
+                                className: "relative cursor-pointer bg-[#090B0C] border border-[#4E4E4E] w-[112px] h-[112px] flex justify-center items-center p-5 rounded-[2px] transition-transform ".concat(c === e ? "ring-2 ring-[#F2E691] scale-90" : ""),
+                                onClick: () => u(e),
+                                children: (0, r.jsx)(o.default, {
+                                    src: e,
+                                    alt: "User icon",
+                                    width: 100,
+                                    height: 100,
+                                    objectFit: "cover"
+                                })
+                            }, t))
+                        }), (0, r.jsxs)("div", {
+                            className: "mt-6 w-full flex gap-2",
+                            children: [(0, r.jsx)("button", {
+                                onClick: () => {
+                                    if (c) {
+                                        if (c === s) {
+                                            (0, a.oR)({
+                                                title: "New profile photo matches old profile photo.",
+                                                description: "Please select a different profile photo.",
+                                                variant: "destructive"
+                                            });
+                                            return
+                                        }
+                                        x(!0), setTimeout(() => {
+                                            x(!1), d(c), (0, a.oR)({
+                                                title: "Success",
+                                                description: "Profile photo updated successfully"
+                                            }), t(!1)
+                                        }, 1e3)
+                                    }
+                                },
+                                className: "w-1/2 cursor-pointer bg-[#1F2223] hover:bg-stone-900 border border-[#4E4E4E] py-[10px] px-2 font-medium text-base uppercase",
+                                children: p ? (0, r.jsx)("div", {
+                                    className: "flex flex-col items-center",
+                                    children: (0, r.jsx)("div", {
+                                        className: "w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin"
+                                    })
+                                }) : "Save"
+                            }), (0, r.jsx)("button", {
+                                onClick: () => t(!1),
+                                className: "w-1/2 cursor-pointer bg-[#1F2223] hover:bg-stone-900 border border-[#4E4E4E] py-[10px] px-2 font-medium text-base uppercase",
+                                children: "Cancel"
+                            })]
+                        })]
+                    })
+                },
+                R = ["Settings", "Claim", "History", "Add Funds"],
+                U = e => {
+                    let {
+                        setShowUserModal: t,
+                        defaultTab: s = R[0]
+                    } = e, [o, a] = (0, n.useState)(s), [i, l] = (0, n.useState)(!1);
+                    return (0, r.jsxs)("div", {
+                        className: "",
+                        children: [(0, r.jsx)("h2", {
+                            className: "text-center text-[#F2E691] text-xl font-bold",
+                            children: i ? "Profile Photo" : o
+                        }), i ? (0, r.jsx)(I, {
+                            setShowPfpView: l
+                        }) : (0, r.jsxs)(r.Fragment, {
+                            children: [(0, r.jsx)("div", {
+                                className: "mt-4 w-full grid grid-cols-2 sm:grid-cols-4",
+                                children: R.map(e => (0, r.jsx)("button", {
+                                    onClick: () => a(e),
+                                    className: "".concat(o === e ? "bg-[#2F322D] text-[#F2E691]" : "cursor-pointer bg-[#1E2125] text-white hover:bg-stone-900", " border border-[#4E4E4E] p-1 text-base font-medium"),
+                                    children: e
+                                }, e))
+                            }), (0, r.jsx)("div", {
+                                className: "mt-8",
+                                children: (() => {
+                                    switch (o) {
+                                        case "Settings":
+                                            return (0, r.jsx)(u, {
+                                                setShowUserModal: t,
+                                                setShowPfpView: l
+                                            });
+                                        case "Claim":
+                                            return (0, r.jsx)(p.A, {});
+                                        case "History":
+                                            return (0, r.jsx)(x.A, {});
+                                        case "Add Funds":
+                                            return (0, r.jsx)(D, {});
+                                        default:
+                                            return null
+                                    }
+                                })()
+                            })]
+                        })]
+                    })
+                }
+        },
+        55571: (e, t, s) => {
+            s.d(t, {
+                R: () => i,
+                T: () => a
+            });
+            var r = s(95155),
+                n = s(12115);
+            let o = (0, n.createContext)({
+                    displayName: null,
+                    pfpString: null,
+                    setDisplayName: () => {},
+                    setPfpString: () => {}
+                }),
+                a = e => {
+                    let {
+                        children: t
+                    } = e, [s, a] = (0, n.useState)(null), [i, l] = (0, n.useState)(null);
+                    return (0, n.useEffect)(() => {
+                        a(localStorage.getItem("displayName")), l(localStorage.getItem("pfpString"))
+                    }, []), (0, r.jsx)(o.Provider, {
+                        value: {
+                            displayName: s,
+                            pfpString: i,
+                            setDisplayName: e => {
+                                a(e), localStorage.setItem("displayName", e), document.cookie = "displayName=".concat(e, "; path=/")
+                            },
+                            setPfpString: e => {
+                                l(e), localStorage.setItem("pfpString", e), document.cookie = "pfpString=".concat(e, "; path=/")
+                            }
+                        },
+                        children: t
+                    })
+                },
+                i = () => (0, n.useContext)(o)
+        },
+        69596: (e, t, s) => {
+            s.d(t, {
+                Di: () => i,
+                Ui: () => o,
+                WP: () => d,
+                hI: () => l,
+                jY: () => a,
+                rP: () => n
+            });
+            var r = s(87729);
+            let n = e => r.MP.includes(e),
+                o = () => {
+                    var e;
+                    return (null === (e = document.cookie.split("; ").find(e => e.startsWith("hasAgreedToAntiWhinePolicy="))) || void 0 === e ? void 0 : e.split("=")[1]) === "true"
+                },
+                a = () => {
+                    var e;
+                    return (null === (e = document.cookie.split("; ").find(e => e.startsWith("hasAgreedToTermsAndConditions="))) || void 0 === e ? void 0 : e.split("=")[1]) === "true"
+                },
+                i = () => o() && a(),
+                l = () => {
+                    document.cookie = "hasAgreedToAntiWhinePolicy=true; path=/; max-age=31536000"
+                },
+                d = () => {
+                    document.cookie = "hasAgreedToTermsAndConditions=true; path=/; max-age=31536000"
+                }
+        }
+    }
+]);

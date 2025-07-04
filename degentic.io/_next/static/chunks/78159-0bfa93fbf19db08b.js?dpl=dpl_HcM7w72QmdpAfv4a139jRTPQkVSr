@@ -1,0 +1,751 @@
+"use strict";
+(self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+    [78159], {
+        7345: (e, t, o) => {
+            o.d(t, {
+                A: () => T
+            });
+            var i = o(95155),
+                r = o(12115),
+                n = o(5565),
+                s = o(13478),
+                a = o(20241),
+                l = o(81143),
+                c = o(57857),
+                d = o(32068),
+                m = o(62685),
+                u = o(64106),
+                h = o(78144),
+                p = o(87729),
+                x = o(26542),
+                f = o(35684),
+                b = o(18676),
+                g = o(38525);
+            let y = (0, d.P)({
+                    client: u.S,
+                    chain: h.E,
+                    address: p.gB
+                }),
+                v = (0, d.P)({
+                    client: u.S,
+                    chain: h.E,
+                    address: p.TI
+                }),
+                w = e => {
+                    let {
+                        closeModal: t,
+                        betContest: o,
+                        optionClickedIndex: d,
+                        isConnected: u = !1,
+                        walletBalance: h,
+                        formattedWalletBalance: w,
+                        allowance: j
+                    } = e, [N, E] = (0, r.useState)(d || 0), [C, S] = (0, r.useState)(Math.min(25, h || 0).toString()), [A, F] = (0, r.useState)(!1), [Y, T] = (0, r.useState)(!1), [P, B] = (0, r.useState)(!1), [k, D] = (0, r.useState)(!1), I = (0, m.m)({
+                        contract: y,
+                        method: "function approve(address spender, uint256 amount)",
+                        params: [p.TI, x.Ao]
+                    });
+                    (0, r.useEffect)(() => {
+                        if (!u) {
+                            F(!1);
+                            return
+                        }
+                        h && F("" !== C && parseFloat(C || "0") > 0 && parseFloat(C || "0") <= h && null !== N)
+                    }, [u, h, C]);
+                    let W = () => (0, m.m)({
+                        contract: v,
+                        method: "function bet(uint256 contestID, uint8 optionID, uint256 amount)",
+                        params: [BigInt(o.id), N, (0, f.X)(C || "0", p.eC)]
+                    });
+                    if (!0 === Y) return (0, i.jsxs)(s.P.div, {
+                        initial: {
+                            opacity: 0,
+                            y: 20
+                        },
+                        animate: {
+                            opacity: 1,
+                            y: 0
+                        },
+                        exit: {
+                            opacity: 0,
+                            y: 20
+                        },
+                        className: "mt-12 flex flex-col gap-6 w-full",
+                        children: [(0, i.jsx)("h3", {
+                            className: "text-[#F2E691] text-xl font-bold uppercase text-center",
+                            children: "Prediction Placed!"
+                        }), (0, i.jsxs)("div", {
+                            className: "text-left font-medium text-lg",
+                            children: [(0, i.jsxs)("div", {
+                                children: [(0, i.jsx)("p", {
+                                    className: "text-xs text-[#4E4E4E]",
+                                    children: "Market"
+                                }), (0, i.jsx)("p", {
+                                    children: o.betName
+                                })]
+                            }), (0, i.jsxs)("div", {
+                                className: "mt-5 grid grid-cols-1 md:grid-cols-2 gap-y-[20px] gap-x-4",
+                                children: [(0, i.jsxs)("div", {
+                                    children: [(0, i.jsx)("p", {
+                                        className: "text-xs text-[#4E4E4E]",
+                                        children: "Your Prediction"
+                                    }), (0, i.jsx)("p", {
+                                        children: o.optionNames[N]
+                                    })]
+                                }), (0, i.jsxs)("div", {
+                                    children: [(0, i.jsx)("p", {
+                                        className: "text-xs text-[#4E4E4E]",
+                                        children: "Current Odds"
+                                    }), (0, i.jsx)("p", {
+                                        children: (0, l.El)(o, N, 1e-5)
+                                    })]
+                                }), (0, i.jsxs)("div", {
+                                    children: [(0, i.jsx)("p", {
+                                        className: "text-xs text-[#4E4E4E]",
+                                        children: "Prediction Amount"
+                                    }), (0, i.jsxs)("p", {
+                                        children: ["$", C]
+                                    })]
+                                }), (0, i.jsxs)("div", {
+                                    children: [(0, i.jsx)("p", {
+                                        className: "text-xs text-[#4E4E4E]",
+                                        children: "Current Potential Winnings"
+                                    }), (0, i.jsxs)("p", {
+                                        children: ["$", (0, l.Dj)(o, N, parseFloat(C || "0") || 0)]
+                                    })]
+                                })]
+                            })]
+                        }), (0, i.jsx)("div", {
+                            className: "bg-[##131619] border border-[#4E4E4E] rounded-[2px] px-6 py-4 flex justify-center items-center text-center text-[#A9A9A9] text-sm",
+                            children: (0, i.jsx)("p", {
+                                children: "Your prediction has been placed! Good luck!"
+                            })
+                        }), (0, i.jsxs)("div", {
+                            className: "flex flex-col xs:flex-row items-center gap-4 sm:gap-6",
+                            children: [(0, i.jsx)("button", {
+                                type: "button",
+                                onClick: () => {
+                                    let e = p.V2 + "prediction/" + o.id;
+                                    navigator.clipboard.writeText(e), (0, a.oR)({
+                                        title: "Copied Link",
+                                        description: "Direct link has been copied to clipboard."
+                                    })
+                                },
+                                className: "w-full h-min m-auto bg-[#101C18] border border-[#21493E] rounded-[2px] py-1 sm:py-2 px-6 font-medium text-base uppercase text-[#53D0B0] text-center cursor-pointer hover:bg-[#243d35]",
+                                children: "Share It!"
+                            }), (0, i.jsx)("button", {
+                                type: "button",
+                                onClick: () => {
+                                    T(!1), t()
+                                },
+                                className: "w-full h-min m-auto bg-[#53D0B0] hover:bg-[#53D0B0]/70 border border-[#21493E] rounded-[2px] py-1 sm:py-2 px-6 font-medium text-base uppercase text-[#101C18] text-center cursor-pointer",
+                                children: "Explore More"
+                            })]
+                        })]
+                    });
+                    let O = e => {
+                        !k && E(e)
+                    };
+                    return (0, i.jsxs)(i.Fragment, {
+                        children: [P && (0, i.jsx)(b.z, {
+                            wider: !0,
+                            onClose: () => B(!1),
+                            children: (0, i.jsx)(g.A, {
+                                setShowUserModal: B,
+                                defaultTab: "Add Funds"
+                            })
+                        }), (0, i.jsxs)("div", {
+                            className: "mt-12",
+                            children: [(0, i.jsx)("div", {
+                                className: "text-left text-[#F2E691] text-xl font-bold",
+                                children: o.betName
+                            }), (0, i.jsxs)("div", {
+                                className: "mt-6 sm:mt-8 h-full flex flex-col gap-4 w-full relative",
+                                children: [(0, i.jsxs)("div", {
+                                    className: "w-full",
+                                    children: [(0, i.jsx)("p", {
+                                        className: "text-left font-medium text-xs text-[#A9A9A9]",
+                                        children: "Predict"
+                                    }), (0, i.jsxs)("div", {
+                                        className: "mt-1 relative w-full",
+                                        children: [(0, i.jsx)("select", {
+                                            name: "",
+                                            id: "",
+                                            defaultValue: d,
+                                            onChange: e => O(Number(e.target.value)),
+                                            className: "w-full text-left bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] text-white font-medium appearance-none pr-10 focus:outline-none focus:ring focus:ring-[#F2E691] focus:border-[#F2E691]",
+                                            children: o.optionNames.map((e, t) => (0, i.jsx)("option", {
+                                                value: t,
+                                                children: e
+                                            }, t))
+                                        }), (0, i.jsx)("div", {
+                                            className: "absolute top-1/2 right-3 transform -translate-y-1/2 pointer-events-none",
+                                            children: (0, i.jsx)(n.default, {
+                                                src: "/icons/chevron.svg",
+                                                alt: "chevron",
+                                                width: 16,
+                                                height: 16
+                                            })
+                                        })]
+                                    })]
+                                }), (0, i.jsxs)("div", {
+                                    className: "w-full",
+                                    children: [(0, i.jsxs)("div", {
+                                        className: "flex justify-between font-medium text-xs text-[#A9A9A9]",
+                                        children: [(0, i.jsx)("p", {
+                                            className: "text-left",
+                                            children: "Amount to Predict"
+                                        }), w && (0, i.jsxs)("p", {
+                                            className: "text-right",
+                                            children: ["Balance: ", w]
+                                        })]
+                                    }), (0, i.jsx)("div", {
+                                        className: "flex gap-0.5 items-center",
+                                        children: (0, i.jsx)("input", {
+                                            type: "text",
+                                            inputMode: "decimal",
+                                            name: "betAmount",
+                                            id: "betAmount",
+                                            placeholder: "Prediction Amount",
+                                            value: C || "",
+                                            onChange: e => {
+                                                let t = e.target.value;
+                                                !k && ("" === t || /^\d*\.?\d*$/.test(t)) && S(t)
+                                            },
+                                            className: "mt-1 w-full text-left bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] ".concat((h || 0) >= (parseFloat(C || "0") || 0) ? "text-white" : "text-red-500", " font-medium focus:outline-none focus:ring focus:ring-[#F2E691] focus:border-[#F2E691]")
+                                        })
+                                    }), u && !1 === A && parseFloat(C || "0") <= (null != h ? h : 0) && (0, i.jsx)("p", {
+                                        className: "mt-[6px] text-xs text-red-500",
+                                        children: "Enter a valid amount"
+                                    }), u && parseFloat(C || "0") > (null != h ? h : 0) && (0, i.jsxs)("div", {
+                                        className: "mt-[6px] flex items-center gap-4",
+                                        children: [(0, i.jsx)("p", {
+                                            className: "text-xs text-red-500",
+                                            children: "Insufficient Balance"
+                                        }), (0, i.jsx)("button", {
+                                            type: "button",
+                                            onClick: () => B(!0),
+                                            disabled: !u,
+                                            className: "cursor-pointer text-left text-xs text-[#A9A9A9] hover:text-[#A9A9A9]/80 underline",
+                                            children: "Add Funds"
+                                        })]
+                                    })]
+                                }), (0, i.jsxs)("div", {
+                                    className: "w-full",
+                                    children: [(0, i.jsx)("p", {
+                                        className: "text-left font-medium text-xs text-[#A9A9A9]",
+                                        children: "Current Odds"
+                                    }), (0, i.jsx)("div", {
+                                        className: "mt-1 w-full text-left bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] text-white font-medium",
+                                        children: "+0" == (0, l.El)(o, N, 0) ? "You Are Placing The First Prediction" : "--" == (0, l.El)(o, N, 0) ? "No Predictions On Other Option" : (0, l.El)(o, N, parseFloat(C || "0") || 0)
+                                    })]
+                                }), (0, i.jsxs)("div", {
+                                    className: "w-full",
+                                    children: [(0, i.jsx)("p", {
+                                        className: "text-left font-medium text-xs text-[#A9A9A9]",
+                                        children: "Current Payout"
+                                    }), (0, i.jsx)("div", {
+                                        className: "mt-1 w-full text-left bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] text-white font-medium",
+                                        children: null !== N ? "$".concat((0, l.Dj)(o, N, parseFloat(C || "0") || 0)) : "Select an option"
+                                    })]
+                                })]
+                            }), u ? null === C || "" === C || 0 >= parseFloat(C || "0") ? (0, i.jsx)("button", {
+                                className: "mt-6 sm:mt-8 w-full h-min m-auto bg-[#101C18]  border border-[#21493E] rounded-[2px] py-1 sm:py-2 px-6 font-medium text-base uppercase text-[#53D0B0] text-center opacity-50 cursor-not-allowed",
+                                disabled: !0,
+                                children: "Enter Prediction Amount"
+                            }) : void 0 === h || h < parseFloat(C || "0") ? (0, i.jsx)("button", {
+                                className: "mt-6 sm:mt-8 w-full h-min m-auto bg-[#101C18]  border border-[#21493E] rounded-[2px] py-1 sm:py-2 px-6 font-medium text-base uppercase text-[#53D0B0] text-center opacity-50 cursor-not-allowed",
+                                disabled: !0,
+                                children: "Insufficient Balance"
+                            }) : parseFloat(C || "0") > j ? (0, i.jsx)(c.v, {
+                                transaction: () => I,
+                                disabled: !A,
+                                unstyled: !0,
+                                className: "mt-6 sm:mt-8 w-full h-min m-auto bg-[#101C18]  border border-[#21493E] rounded-[2px] py-1 sm:py-2 px-6 font-medium text-base uppercase text-[#53D0B0] text-center flex justify-center items-center ".concat(A ? "cursor-pointer hover:bg-[#243d35]" : "opacity-50 cursor-not-allowed"),
+                                onTransactionConfirmed: () => {
+                                    (0, a.oR)({
+                                        title: "Approval Confirmed",
+                                        description: "Successfully Approved USDC."
+                                    }), D(!1)
+                                },
+                                onTransactionSent: () => {
+                                    (0, a.oR)({
+                                        title: "Approval Sent",
+                                        description: "Waiting for approval..."
+                                    }), D(!0)
+                                },
+                                onError: () => {
+                                    (0, a.oR)({
+                                        title: "Approval Failed",
+                                        description: "Failed to approve USDC.",
+                                        variant: "destructive"
+                                    }), D(!1)
+                                },
+                                children: "Approve"
+                            }) : (0, i.jsx)(c.v, {
+                                transaction: () => W(),
+                                disabled: !A,
+                                unstyled: !0,
+                                className: "mt-6 sm:mt-8 w-full h-min m-auto bg-[#101C18]  border border-[#21493E] rounded-[2px] py-1 sm:py-2 px-6 font-medium text-base uppercase text-[#53D0B0] text-center ".concat(A ? "cursor-pointer hover:bg-[#243d35]" : "opacity-50 cursor-not-allowed"),
+                                onTransactionConfirmed: () => {
+                                    (0, a.oR)({
+                                        title: "Prediction Confirmed",
+                                        description: "Successfully Placed Prediction."
+                                    }), T(!0)
+                                },
+                                onTransactionSent: () => {
+                                    (0, a.oR)({
+                                        title: "Prediction Sent",
+                                        description: "Waiting for confirmation..."
+                                    })
+                                },
+                                onError: () => {
+                                    (0, a.oR)({
+                                        title: "Prediction Failed",
+                                        description: "Failed to place Prediction.",
+                                        variant: "destructive"
+                                    })
+                                },
+                                children: "Place Prediction"
+                            }) : (0, i.jsx)("button", {
+                                className: "mt-6 sm:mt-8 w-full h-min m-auto bg-[#101C18]  border border-[#21493E] rounded-[2px] py-1 sm:py-2 px-6 font-medium text-base uppercase text-[#53D0B0] text-center opacity-50 cursor-not-allowed",
+                                disabled: !0,
+                                children: "Login to Predict"
+                            })]
+                        })]
+                    })
+                };
+            var j = o(24786),
+                N = o(15158),
+                E = o(32206),
+                C = o(69596),
+                S = o(25683);
+            let A = ["Please read these terms and conditions carefully before using PVP Money and any of its connected services.", "PVP.money is owned and operated by PVP Money System Limitada and is registered in Costa Rica.", "Interpretation and Definitions\nInterpretation\nThe words of which the initial letter is capitalized have meanings defined under the following conditions.", "The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.", "Definitions\nFor the purposes of these Terms and Conditions:", 'Company: (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to PVP Money Systems Limitada.', "Country: refers to “Costa Rica”.", "Service: refers to the Website or any subsidiary pages on the website.", "Restricted Jurisdiction: refers to any jurisdiction, state, country, or region as outlined in the 'Restricted Regions and Jurisdictions' section of these Terms.", 'Terms and Conditions: (also referred as "Terms") mean these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service.', "Website: refers to PVP.money, accessible from the Company.", "You: means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable. The term 'Your' also refers to the individual in the same way as aforementioned.", "Acknowledgement\nThese are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.", "Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms and Conditions. These Terms and Conditions apply to all visitors, users and others who access or use the Service.", "By accessing or using the Service, You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms and Conditions, then You may not access the Service.", "By accessing or using the Service, You confirm to be 18 years or older. If You are not 18 years or older, You may not access the Service.", "You are not allowed to register on the Website and use Our Service if you are a resident of any Restricted Jurisdiction. We reserve the right to refuse customers from any other countries over and above these jurisdictions at Our own discretion.", "For legal reasons, some or all residents or persons located in certain countries, in addition to those listed in the paragraph above, may be prohibited from accessing certain services on the Website. This Website is not intended to be used by persons in countries where such activities are prohibited. You are responsible for researching the laws applicable in Your locality or country. You must ensure that You are complying with relevant laws in the jurisdiction in which You are using the Website or any Service.", "Your access to and use of the Service is also conditioned on Your acceptance of and compliance with the Privacy Policy of the Company. Our Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your personal information when You use the Application or the Website and tells You about Your privacy rights and how the law protects You. Please read Our Privacy Policy carefully before using Our Service", "Grant of License\nWe grant You a non-exclusive, personal, non-transferable right to use Our Service on any device able to connect to the internet in Your possession. This right also extends to other platforms that may choose to integrate or utilise the Service as owned and provisioned by the Company.", "The Service is for adults only, therefore Minors below the age of 18 are not permitted to access the Website or use any Service on the Website. We do not allow gambling below the age of 18, even if it is allowed in Your jurisdiction.", "Intellectual Property\nThe Service and its original content (excluding Content provided by You or other users), features and functionality are and will remain the exclusive property of the Company.", "The Service is protected by copyright, trademark, and other laws of both the Country of Company registration and also other foreign countries.", "Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of the Company.", "Links to Other Websites\nOur Service may contain links to third-party web sites or services that are not owned or controlled by the Company.", "The Company has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third-party web sites or services. You further acknowledge and agree that the Company shall not be responsible or liable, directly, or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods, or services available on or through any such web sites or services.", "We strongly advise You to read the terms and conditions and privacy policies of any third-party web sites or services that You visit.", "Limitation of Liability\nNotwithstanding any damages that You might incur, the entire liability of the Company and any of its suppliers under any provision of these Terms and Your exclusive remedy for all of the foregoing, shall be limited to the amount actually paid by You through the Service or 100 USD if You haven't purchased anything through the Service.", "To the maximum extent permitted by applicable law, in no event shall the Company or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever (including, but not limited to, damages for loss of profits, loss of data or other information, for business interruption, for personal injury, loss of privacy arising out of or in any way related to the use of or inability to use the Service, third-party software and/or third-party hardware used with the Service, or otherwise in connection with any provision of these Terms), even if the Company or any supplier has been advised of the possibility of such damages and even if the remedy fails of its essential purpose.", "Some jurisdictions do not allow the exclusion of implied warranties or limitation of liability for incidental or consequential damages, which means that some of the above limitations may not apply. In these jurisdictions, each party's liability will be limited to the greatest extent permitted by law.", '"As Is" and "As Available" Disclaimer\nThe Service is provided to You "As Is" and "As Available" and with all faults and defects without warranty of any kind. To the maximum extent permitted under applicable law, the Company, on its own behalf and on behalf of its Shareholders and its and their respective licensors and service providers, expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the Service, including all implied warranties of merchantability, fitness for a particular purpose, title and non-infringement, and warranties that may arise out of course of dealing, course of performance, usage or trade practice. Without limitation to the foregoing, the Company provides no warranty or undertaking, and makes no representation of any kind that the Service will meet Your requirements, achieve any intended results, be compatible or work with any other software, applications, systems, or services, operate without interruption, meet any performance or reliability standards or be error free or that any errors or defects can or will be corrected.', "Without limiting the foregoing, neither the Company nor any of the company's provider(s) makes any representation or warranty of any kind, express or implied: (i) as to the operation or availability of the Service, or the information, content, and materials or products included thereon; (ii) that the Service will be uninterrupted or error-free; (iii) as to the accuracy, reliability, or currency of any information or content provided through the Service; or (iv) that the Service, its servers, the content, or e-mails sent from or on behalf of the Company are free of viruses, scripts, trojan horses, worms, malware, timebombs or other harmful components.", "Some jurisdictions do not allow the exclusion of certain types of warranties or limitations on applicable statutory rights of a consumer, so some or all the above exclusions and limitations may not apply to You. But in such a case the exclusions and limitations set forth in this section shall be applied to the greatest extent enforceable under applicable law.", "Governing Law\nThe laws of the Country, excluding its conflicts of law rules, shall govern these Terms and Your use of the Service. Your use of the Application may also be subject to other local, state, national, or international laws.", "The Service shall be provided, governed, and enforced in accordance with the laws of the Country, without regard to its conflict of laws rules. It's courts shall have exclusive jurisdiction.", "Disputes Resolution\nIf You have any concern or dispute about the Service, You agree to first try to resolve the dispute informally by contacting the Company.", "For European Union (EU) Users\nIf You are a European Union consumer, you will benefit from any mandatory provisions of the law of the country in which you are resident in.", "United States Legal Compliance\nYou represent and warrant that; (i) You are not located in a country that is subject to the United States government embargo, or that has been designated by the United States government as a “terrorist supporting” country, and (ii) You are not listed on any United States government list of prohibited or restricted parties.", "Restricted Region and Territories\nIndividuals in, under the control of, or a national or resident of the following jurisdictions are prohibited from participating and using the Service:\n\nUnited States of America and its territories\nFrance and its territories\nNetherlands and its territories that form the Kingdom of Netherlands, Including:\nBonaire\nSint Eustatius\nSaba\nAruba\nCuracao\nSint Maarten\nAustralia and its territories\nUnited Kingdom of Great Britain and Northern Ireland\nSpain\nCyprus\nGermany\nAny other jurisdiction where laws prohibit participation in or require licensing or registration of the Company in order for participation to take place, or which is embargoed by the United States of America, the European Union or the United Kingdom\nIf You are resident in, either permanently or temporarily, or connect to Our Service from any jurisdiction outlined above, You assume all responsibility for any attempted or successful usage of Our Service, and You agree that you are legally allowed to use the Service based on your location or residence.", "Severability and Waiver\nSeverability\nIf any provision of these Terms is held to be unenforceable or invalid, such provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law and the remaining provisions will continue in full force and effect.", "Waiver\nExcept as provided herein, the failure to exercise a right or to require performance of an obligation under this Terms shall not affect a party's ability to exercise such right or require such performance at any time thereafter, nor shall be the waiver of a breach constitute a waiver of any subsequent breach.", "Translation Interpretation\nThese Terms and Conditions may have been translated if We have made them available to You on our Service.\n\nYou agree that the original English text shall prevail in the case of a dispute.", "Changes to these Terms and Conditions\nWe reserve the right, at Our sole discretion, to modify or replace these Terms at any time. If a revision is material, We will make reasonable efforts to provide at least 14 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at Our sole discretion.\n\nBy continuing to access or use Our Service after those revisions become effective, You agree to be bound by the revised terms. If You do not agree to the new terms, in whole or in part, please stop using the website and the Service.", "Contact Us\nIf you have any questions about these Terms and Conditions, You can contact us:\n\nBy email: contact@pvp.money"],
+                F = ["This is a prediction market platform. You might win, you might lose. That's how predictions work.", "Fishtank makes money from VOLUME, not outcomes. We profit whether you win or lose.", "Only an idiot would rig a prediction market platform, it kills the fun, and makes it not profitable over time.", "Fishtank is chaos by design. Random shit happens constantly. That's literally the show.", "By clicking “I Agree” you promise not to cry “rigged” if you lose a prediction.", "If you can't handle the unpredictability, go bet on golf."],
+                Y = e => {
+                    let {
+                        closeModal: t
+                    } = e, [o, n] = (0, r.useState)(0), [a, l] = (0, r.useState)(!1), c = !a && A.length > 3;
+                    (0, r.useEffect)(() => {
+                        if ((0, C.Di)()) {
+                            t();
+                            return
+                        }
+                        if ((0, C.Ui)()) {
+                            if ((0, C.jY)()) {
+                                t();
+                                return
+                            }
+                            n(1)
+                        }
+                    }, []);
+                    let d = e => {
+                        if (0 === e) {
+                            if ((0, C.hI)(), (0, C.jY)()) {
+                                t();
+                                return
+                            }
+                            n(1)
+                        }
+                        if (1 === e) {
+                            if ((0, C.WP)(), (0, C.Ui)()) {
+                                t();
+                                return
+                            }
+                            n(0)
+                        }
+                    };
+                    return (0, i.jsxs)(S.N, {
+                        mode: "wait",
+                        children: [0 === o && (0, i.jsxs)(s.P.div, {
+                            initial: {
+                                opacity: 0
+                            },
+                            animate: {
+                                opacity: 1
+                            },
+                            exit: {
+                                opacity: 0
+                            },
+                            transition: {
+                                duration: .5
+                            },
+                            className: "mt-12",
+                            children: [(0, i.jsx)("h3", {
+                                className: "text-center text-[#F2E691] text-xl font-bold uppercase",
+                                children: "Anti-Whining Policy"
+                            }), (0, i.jsxs)("div", {
+                                className: "",
+                                children: [(0, i.jsx)("div", {
+                                    className: "mt-6 sm:mt-8 h-full flex flex-col gap-2",
+                                    children: F.map((e, t) => (0, i.jsx)("div", {
+                                        className: "mt-1 w-full text-left bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] text-white font-medium",
+                                        children: e
+                                    }, t))
+                                }), (0, i.jsx)("button", {
+                                    onClick: () => d(0),
+                                    className: "mt-6 sm:mt-8 w-full h-min cursor-pointer m-auto bg-[#101C18] hover:bg-[#243d35] border border-[#21493E] rounded-[2px] py-1 sm:py-2 px-6 font-medium text-base uppercase text-[#53D0B0] text-center",
+                                    children: "I Agree - I'm Not a Whiner"
+                                })]
+                            })]
+                        }, "anti-whine-policy"), 1 === o && (0, i.jsxs)(s.P.div, {
+                            initial: {
+                                opacity: 0
+                            },
+                            animate: {
+                                opacity: 1
+                            },
+                            exit: {
+                                opacity: 0
+                            },
+                            transition: {
+                                duration: .5
+                            },
+                            className: "mt-12",
+                            children: [(0, i.jsx)("h3", {
+                                className: "text-center text-[#F2E691] text-xl font-bold uppercase",
+                                children: "Terms and Conditions"
+                            }), (0, i.jsxs)("div", {
+                                className: "",
+                                children: [(0, i.jsxs)("div", {
+                                    className: "relative mt-6 sm:mt-8",
+                                    children: [(0, i.jsx)("div", {
+                                        className: "flex flex-col gap-2 transition-max-height duration-300 ".concat(a ? "max-h-full" : "max-h-[400px] overflow-hidden"),
+                                        children: A.map((e, t) => (0, i.jsx)("div", {
+                                            className: "mt-1 w-full text-left bg-[#1F2223] border border-[#4E4E4E] rounded-[2px] p-[10px] text-white font-medium",
+                                            children: e
+                                        }, t))
+                                    }), c && (0, i.jsx)("div", {
+                                        className: "absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0F1213] to-transparent flex items-end justify-center",
+                                        children: (0, i.jsx)("button", {
+                                            onClick: () => l(!0),
+                                            className: "cursor-pointer mb-2 text-sm text-[#53D0B0] underline hover:text-[#6FE6C3]",
+                                            children: "Show More"
+                                        })
+                                    })]
+                                }), (0, i.jsx)("button", {
+                                    onClick: () => d(1),
+                                    className: "mt-6 sm:mt-8 w-full h-min cursor-pointer m-auto bg-[#101C18] hover:bg-[#243d35] border border-[#21493E] rounded-[2px] py-1 sm:py-2 px-6 font-medium text-base uppercase text-[#53D0B0] text-center",
+                                    children: "I Agree to the Terms and Conditions"
+                                })]
+                            })]
+                        }, "terms-and-conditions")]
+                    })
+                },
+                T = e => {
+                    let {
+                        betContest: t,
+                        isConnected: o,
+                        address: s,
+                        walletBalance: c,
+                        formattedWalletBalance: d,
+                        allowance: m,
+                        sticky: u = !1,
+                        userBetAmounts: h = [],
+                        hideTitle: x = !1
+                    } = e, [f, g] = (0, r.useState)(!1), [y, v] = (0, r.useState)(!1), [S, A] = (0, r.useState)(null), [F, T] = (0, r.useState)(!1), [P, B] = (0, r.useState)(!1), [k, D] = (0, r.useState)(!1), I = (0, E.Ay)({
+                        targetTime: t.bettingEndTime
+                    }), W = e => "Total Prediction Pool: $".concat(e.toLocaleString()), O = e => {
+                        if (!1 == (0, C.Di)()) {
+                            g(!0), (0, a.oR)({
+                                title: "Please agree to the terms.",
+                                description: "You must agree to the terms before placing a prediction."
+                            });
+                            return
+                        }
+                        A(e), v(!y)
+                    }, M = e => {
+                        T(!F)
+                    }, U = () => {
+                        B(!P)
+                    }, R = h.length > 0 ? h : Array(t.optionNames.length).fill(0), L = (0, E.kz)(t.bettingEndTime), z = new Date(1e3 * t.bettingEndTime).toLocaleString("en-US", {
+                        month: "long",
+                        day: "2-digit",
+                        year: "numeric"
+                    }), V = t.winningOption < t.optionNames.length, q = e => t.winningOption === e ? "bg-[#101C18] border-[#53D0B0]" : R[e] > 0 ? V ? "bg-[#211413] border-[#562C2A]" : "bg-[#1B1F24] border-[#4E4E4E]" : "bg-[#131619] border-[#4E4E4E]", $ = e => t.winningOption === t.optionBetAmounts.length ? R[e] > 0 ? (0, i.jsxs)("div", {
+                        className: "mt-4 flex flex-col lg:flex-row justify-between items-center gap-4",
+                        children: [(0, i.jsxs)("p", {
+                            className: "text-[#808080] text-sm font-medium text-center",
+                            children: ["You have placed $", R[e].toLocaleString([], {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }), " ", "on this prediction."]
+                        }), (0, i.jsx)("button", {
+                            onClick: () => O(e),
+                            className: "cursor-pointer bg-[#2F322D] text-[#F2E691] border border-[#4E4E4E] p-1 text-sm font-medium uppercase",
+                            children: "Add More"
+                        })]
+                    }) : void 0 : t.winningOption === e ? R[e] > 0 ? (0, i.jsxs)("div", {
+                        className: "mt-4 flex flex-col lg:flex-row justify-between items-center gap-4",
+                        children: [(0, i.jsxs)("div", {
+                            className: "flex items-center gap-2",
+                            children: [(0, i.jsx)(n.default, {
+                                src: "/icons/trophy.svg",
+                                alt: "Trophy Icon",
+                                width: 20,
+                                height: 20
+                            }), (0, i.jsx)("p", {
+                                className: "text-[#808080] text-sm font-medium text-center",
+                                children: "You've won! Your share of the prize is [add prize amount here]."
+                            })]
+                        }), (0, i.jsx)("button", {
+                            onClick: () => M(e),
+                            className: "cursor-pointer bg-[#2F322D] text-[#F2E691] border border-[#4E4E4E] p-1 text-sm font-medium uppercase",
+                            children: "Claim Winnings"
+                        })]
+                    }) : (0, i.jsxs)("div", {
+                        className: "flex items-center gap-2",
+                        children: [(0, i.jsx)(n.default, {
+                            src: "/icons/trophy.svg",
+                            alt: "Trophy Icon",
+                            width: 20,
+                            height: 20
+                        }), (0, i.jsx)("p", {
+                            className: "text-[#808080] text-sm font-medium text-center",
+                            children: "Winner!"
+                        })]
+                    }) : R[e] > 0 ? (0, i.jsxs)("div", {
+                        className: "mt-4 flex flex-col lg:flex-row justify-between items-center gap-4",
+                        children: [(0, i.jsx)("p", {
+                            className: "text-[#808080] text-sm font-medium text-center",
+                            children: "Try again, Loser."
+                        }), (0, i.jsx)("button", {
+                            onClick: () => U(),
+                            className: "cursor-pointer bg-[#2F322D] text-[#F2E691] border border-[#4E4E4E] p-1 text-sm font-medium uppercase",
+                            children: "View History"
+                        })]
+                    }) : void 0, _ = t.metadata.length > 0 ? t.metadata.filter((e, t) => t > 0) : [];
+                    return (0, i.jsxs)(i.Fragment, {
+                        children: [f && (0, i.jsx)(b.z, {
+                            onClose: () => g(!1),
+                            children: (0, i.jsx)(Y, {
+                                closeModal: () => {
+                                    g(!1)
+                                }
+                            })
+                        }), y && (0, i.jsx)(b.z, {
+                            onClose: () => v(!1),
+                            children: (0, i.jsx)(w, {
+                                closeModal: () => v(!1),
+                                betContest: t,
+                                optionClickedIndex: S,
+                                isConnected: o,
+                                walletBalance: c,
+                                formattedWalletBalance: d,
+                                allowance: m
+                            })
+                        }), F && (0, i.jsx)(b.z, {
+                            onClose: () => T(!1),
+                            children: (0, i.jsx)(j.A, {})
+                        }), P && (0, i.jsx)(b.z, {
+                            onClose: () => B(!1),
+                            children: (0, i.jsx)(N.A, {})
+                        }), (0, i.jsxs)("div", {
+                            className: "bg-[#0B0D0F] border ".concat(u ? "border-[#F2E691]" : "border-[#4E4E4E]", " rounded-[2px] px-2 md:px-6 py-6"),
+                            children: [!x && (0, i.jsxs)("div", {
+                                className: "flex flex-col sm:flex-row justify-between font-bold",
+                                children: [(0, i.jsx)("h3", {
+                                    className: "text-[#F2E691] text-xl md:text-2xl gap-2",
+                                    children: t.betName
+                                }), L >= 0 && (0, i.jsx)("h3", {
+                                    className: "text-white text-2xl text-center sm:text-right",
+                                    children: I
+                                })]
+                            }), L <= 0 && (V ? (0, i.jsx)("p", {
+                                className: "text-center text-[#53D0B0] text-lg sm:text-2xl font-medium mt-2",
+                                children: "Prediction Completed"
+                            }) : (0, i.jsxs)("div", {
+                                className: "text-center",
+                                children: [(0, i.jsxs)("p", {
+                                    className: "text-[#53D0B0] text-lg sm:text-2xl font-medium mt-2",
+                                    children: ["Prediction Closed On ", z]
+                                }), (0, i.jsx)("p", {
+                                    className: "text-[#A9A9A9] text-sm",
+                                    children: "This prediction is being reviewed and will be paid out ASAP."
+                                })]
+                            })), (0, i.jsx)("div", {
+                                className: "mt-4 flex flex-col gap-1",
+                                children: t.optionNames.map((e, o) => (0, i.jsxs)("div", {
+                                    className: "py-4 px-6 border rounded-[4px] ".concat(q(o)),
+                                    children: [(0, i.jsxs)("div", {
+                                        className: "flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-12",
+                                        children: [(0, i.jsxs)("div", {
+                                            className: "w-full flex flex-col lg:flex-row lg:items-center justify-between gap-4",
+                                            children: [(0, i.jsx)("p", {
+                                                className: "text-[#F2F2F2] font-medium text-lg w-fit lg:w-[280px] overflow-hidden whitespace-pre-wrap",
+                                                children: e
+                                            }), (0, i.jsxs)("div", {
+                                                className: "w-full",
+                                                children: [(0, i.jsxs)("div", {
+                                                    className: "w-full h-4 sm:h-6 bg-[#07090A] border border-[#4E4E4E] rounded-[2px] p-[2px] relative flex gap-[1px]",
+                                                    children: [Array.from({
+                                                        length: (0, l.dP)(t, o)
+                                                    }, (e, t) => (0, i.jsx)("div", {
+                                                        className: "h-full w-[1.5%] xs:min-w-[6px] max-w-2 bg-[#BD0706]"
+                                                    }, t)), (0, i.jsx)("p", {
+                                                        className: "absolute right-2 top-1/2 transform -translate-y-1/2 text-[#F2F2F2] text-sm sm:text-base uppercase font-medium",
+                                                        children: (0, l.El)(t, o)
+                                                    })]
+                                                }), (0, i.jsx)("p", {
+                                                    className: "mt-1 font-medium text-xs text-[#4E4E4E]",
+                                                    children: W(t.optionBetAmounts[o])
+                                                })]
+                                            })]
+                                        }), L > 0 && (0, i.jsx)("button", {
+                                            onClick: () => O(o),
+                                            disabled: L <= 0,
+                                            className: "w-full sm:w-auto h-min ".concat(L <= 0 ? "cursor-disabled" : "cursor-pointer hover:bg-[#243d35]", " m-auto bg-[#101C18] border border-[#21493E] rounded-[2px] py-1 px-6 font-medium text-base uppercase text-[#53D0B0] text-center"),
+                                            children: "Predict"
+                                        })]
+                                    }), $(o)]
+                                }, o))
+                            }), (0, i.jsxs)("div", {
+                                className: "w-full flex flex-col sm:flex-row justify-between items-center",
+                                children: [_ && _.length > 0 && (0, i.jsxs)("div", {
+                                    className: "mt-4",
+                                    children: [(0, i.jsxs)("button", {
+                                        onClick: () => D(!k),
+                                        className: "flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity duration-200",
+                                        children: [(0, i.jsx)("p", {
+                                            className: "text-[#53D0B0] font-bold text-lg",
+                                            children: "Requirements"
+                                        }), (0, i.jsx)(n.default, {
+                                            src: "/icons/chevron_green.svg",
+                                            alt: "chevron",
+                                            width: 24,
+                                            height: 24,
+                                            className: "text-[#53D0B0] ".concat(k ? "rotate-180" : "rotate-0", " transition-transform duration-150 ease-in-out")
+                                        })]
+                                    }), (0, i.jsx)("div", {
+                                        className: "".concat(k ? "max-h-96" : "max-h-0", " overflow-hidden transition-all duration-300 ease-in-out"),
+                                        children: (0, i.jsx)("div", {
+                                            className: "mt-3 flex flex-col gap-3",
+                                            children: _.map((e, t) => (0, i.jsxs)("div", {
+                                                className: "flex items-center gap-2",
+                                                children: [(0, i.jsx)(n.default, {
+                                                    src: "/icons/pixel_label.svg",
+                                                    alt: "chevron",
+                                                    width: 20,
+                                                    height: 20,
+                                                    className: "text-[#53D0B0]"
+                                                }), (0, i.jsx)("p", {
+                                                    className: "text-[#808080] text-sm font-bold",
+                                                    children: e
+                                                })]
+                                            }, t))
+                                        })
+                                    })]
+                                }), (0, i.jsx)("button", {
+                                    onClick: () => {
+                                        let e = p.V2 + "prediction/" + t.id;
+                                        navigator.clipboard.writeText(e), (0, a.oR)({
+                                            title: "Copied Link",
+                                            description: "Direct link has been copied to clipboard."
+                                        })
+                                    },
+                                    className: "ml-auto self-start shrink-0 w-full sm:w-auto flex justify-center items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity duration-200 mt-4 bg-[#53D0B0] border border-[#21493E] rounded-[2px] py-1.5 px-10 font-medium text-base text-[#101C18] text-center uppercase",
+                                    children: (0, i.jsx)("p", {
+                                        children: "Copy & Share"
+                                    })
+                                })]
+                            })]
+                        })]
+                    })
+                }
+        },
+        32206: (e, t, o) => {
+            o.d(t, {
+                Ay: () => s,
+                kz: () => n
+            });
+            var i = o(12115);
+
+            function r(e) {
+                let t = e - Math.floor(Date.now() / 1e3);
+                if (t <= 0) return "0d:0h:0m:0s";
+                let o = Math.floor(t / 86400),
+                    i = Math.floor((t %= 86400) / 3600),
+                    r = Math.floor((t %= 3600) / 60),
+                    n = t % 60;
+                return "".concat(o, "d:").concat(i, "h:").concat(r, "m:").concat(n, "s")
+            }
+            let n = e => e - Math.floor(Date.now() / 1e3),
+                s = e => {
+                    let {
+                        targetTime: t
+                    } = e, [o, n] = (0, i.useState)(r(t));
+                    return (0, i.useEffect)(() => {
+                        let e = setInterval(() => {
+                            n(r(t))
+                        }, 1e3);
+                        return () => clearInterval(e)
+                    }, [t]), o
+                }
+        },
+        71391: (e, t, o) => {
+            o.d(t, {
+                J: () => r
+            });
+            var i = o(95155);
+            o(12115);
+            let r = () => (0, i.jsxs)("div", {
+                className: "bg-[#0B0D0F] border border-[#4E4E4E] rounded-[2px] px-2 md:px-6 py-6",
+                children: [(0, i.jsx)("div", {
+                    className: "flex flex-col sm:flex-row justify-between font-bold",
+                    children: (0, i.jsx)("div", {
+                        className: "w-1/3 h-6 bg-gray-600 animate-pulse"
+                    })
+                }), (0, i.jsx)("div", {
+                    className: "mt-4 flex flex-col gap-1",
+                    children: Array.from({
+                        length: 3
+                    }).map((e, t) => (0, i.jsx)("div", {
+                        className: "flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-12 py-4 px-6 bg-[#131619] border border-[#4E4E4E] rounded-[4px]",
+                        children: (0, i.jsxs)("div", {
+                            className: "w-full flex flex-col lg:flex-row lg:items-center justify-between gap-4",
+                            children: [(0, i.jsx)("div", {
+                                className: "w-1/3 h-6 bg-gray-600 animate-pulse"
+                            }), (0, i.jsx)("div", {
+                                className: "w-full h-6 bg-gray-600 animate-pulse"
+                            }), (0, i.jsx)("div", {
+                                className: "w-full sm:w-40 h-6 bg-gray-600 animate-pulse"
+                            })]
+                        })
+                    }, t))
+                })]
+            })
+        },
+        81143: (e, t, o) => {
+            o.d(t, {
+                $B: () => s,
+                Dj: () => r,
+                El: () => i,
+                dP: () => n
+            });
+            let i = (e, t, o) => {
+                    let i = e.optionBetAmounts.reduce((e, t) => e + t, 0);
+                    return 0 == i ? (o || 0).toString() : 0 == e.optionBetAmounts[t] ? "".concat((i + (o || 0)).toFixed(2)) : ((i - e.optionBetAmounts[t]) * .7 / (e.optionBetAmounts[t] + (o || 0)) + 1).toFixed(2) + "x"
+                },
+                r = (e, t, o) => {
+                    let i = e.optionBetAmounts.reduce((e, t) => e + t, 0);
+                    if (0 == i) return (o || 0).toString();
+                    if (0 == e.optionBetAmounts[t]) return "".concat((i + (o || 0)).toFixed(2));
+                    let r = (i - e.optionBetAmounts[t]) * .7 / (e.optionBetAmounts[t] + (o || 0));
+                    return ((o || 0) * r + (o || 0)).toFixed(2)
+                },
+                n = (e, t) => {
+                    let o = e.optionBetAmounts.reduce((e, t) => e + t, 0);
+                    return 0 == o || 0 == e.optionBetAmounts[t] ? 0 : Math.round(e.optionBetAmounts[t] / o * 45)
+                },
+                s = e => {
+                    let t = e - Math.floor(Date.now() / 1e3);
+                    if (t <= 0) return "Betting Closed";
+                    let o = Math.floor(t / 86400),
+                        i = Math.floor((t %= 86400) / 3600),
+                        r = Math.floor((t %= 3600) / 60),
+                        n = t % 60;
+                    return "".concat(o, "d:").concat(i, "h:").concat(r, "m:").concat(n, "s Remaining")
+                }
+        }
+    }
+]);
